@@ -10,6 +10,7 @@ import abstract_definitions.CraftComponent;
 import rodgortfactory.materials.GlobOfEctoplasm;
 import rodgortfactory.materials.MysticCoin;
 import rodgortfactory.materials.ObsidianShard;
+import rodgortfactory.materials.PhilosophersStone;
 
 /**
  *
@@ -22,6 +23,6 @@ public class MysticClover extends CraftComponent {
         super.materials.add(new Pair(new ObsidianShard(), 249));
         super.materials.add(new Pair(new MysticCoin(), 249));
         super.materials.add(new Pair(new GlobOfEctoplasm(), 249));
+        super.materials.add(new Pair(new PhilosophersStone(), 1494));   
     }
-    
 }
