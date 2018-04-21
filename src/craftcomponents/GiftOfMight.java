@@ -7,10 +7,10 @@ package craftcomponents;
 
 import abstract_definitions.CraftComponent;
 import javafx.util.Pair;
-import rodgortfactory.materials.AncientBone;
-import rodgortfactory.materials.ArmoredScale;
-import rodgortfactory.materials.ViciousClaw;
-import rodgortfactory.materials.ViciousFang;
+import materials.AncientBone;
+import materials.ArmoredScale;
+import materials.ViciousClaw;
+import materials.ViciousFang;
 
 /**
  *

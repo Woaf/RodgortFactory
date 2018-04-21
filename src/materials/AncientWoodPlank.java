@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodgortfactory;
+package materials;
 
-import abstract_definitions.CraftingItem;
-import java.util.ArrayList;
+import abstract_definitions.BaseMaterial;
 
 /**
  *
  * @author Bálint
  */
-public class GuildBank {
-    
-    private ArrayList<CraftingItem> bank;
+public class AncientWoodPlank extends BaseMaterial {
+
+    public AncientWoodPlank() {
+        super("Ancient Wood Plank", 440);
+    }
     
 }

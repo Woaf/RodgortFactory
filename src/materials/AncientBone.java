@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodgortfactory.materials;
+package materials;
 
 import abstract_definitions.BaseMaterial;
 
@@ -11,10 +11,10 @@ import abstract_definitions.BaseMaterial;
  *
  * @author Bálint
  */
-public class GiftOfExploration extends BaseMaterial {
+public class AncientBone extends BaseMaterial {
 
-    public GiftOfExploration() {
-        super("Gift of Exploration", 0);
+    public AncientBone() {
+        super("Ancient Bone", 2008);
     }
     
 }

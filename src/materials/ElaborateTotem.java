@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodgortfactory.materials;
+package materials;
 
 import abstract_definitions.BaseMaterial;
 
@@ -11,10 +11,10 @@ import abstract_definitions.BaseMaterial;
  *
  * @author Bálint
  */
-public class ArmoredScale extends BaseMaterial {
+public class ElaborateTotem extends BaseMaterial {
 
-    public ArmoredScale() {
-        super("Armored Scale", 1963);
+    public ElaborateTotem() {
+        super("Elaborate Totem", 1989);
     }
-    
+        
 }

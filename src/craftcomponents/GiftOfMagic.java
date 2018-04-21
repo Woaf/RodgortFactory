@@ -7,10 +7,10 @@ package craftcomponents;
 
 import abstract_definitions.CraftComponent;
 import javafx.util.Pair;
-import rodgortfactory.materials.ElaborateTotem;
-import rodgortfactory.materials.PileofCrystallineDust;
-import rodgortfactory.materials.PowerfullVenomSac;
-import rodgortfactory.materials.VialOfPowerfullBlood;
+import materials.ElaborateTotem;
+import materials.PileofCrystallineDust;
+import materials.PowerfullVenomSac;
+import materials.VialOfPowerfullBlood;
 
 /**
  *

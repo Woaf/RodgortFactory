@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodgortfactory.materials;
+package materials;
 
 import abstract_definitions.BaseMaterial;
 
@@ -11,10 +11,10 @@ import abstract_definitions.BaseMaterial;
  *
  * @author Bálint
  */
-public class Moltencore extends BaseMaterial {
+public class PileofCrystallineDust extends BaseMaterial {
 
-    public Moltencore() {
-        super("Molten Core", 50);
+    public PileofCrystallineDust() {
+        super("Pile of Crystalline Dust", 815);
     }
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodgortfactory.materials;
+package materials;
 
 import abstract_definitions.BaseMaterial;
 
@@ -11,10 +11,10 @@ import abstract_definitions.BaseMaterial;
  *
  * @author Bálint
  */
-public class MysticCrystal extends BaseMaterial {
+public class ElderWoodLog extends BaseMaterial {
 
-    public MysticCrystal() {
-        super("Mystic Crystal", 30000);
+    public ElderWoodLog() {
+        super("Elder Wood Log", 137);
     }
     
 }

@@ -7,7 +7,7 @@ package craftcomponents;
 
 import abstract_definitions.CraftComponent;
 import javafx.util.Pair;
-import rodgortfactory.materials.RodgortsFlame;
+import materials.RodgortsFlame;
 
 /**
  *

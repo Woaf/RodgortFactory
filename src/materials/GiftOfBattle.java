@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodgortfactory.materials;
+package materials;
 
 import abstract_definitions.BaseMaterial;
 
@@ -11,10 +11,10 @@ import abstract_definitions.BaseMaterial;
  *
  * @author Bálint
  */
-public class GiftOfBaelfire extends BaseMaterial {
+public class GiftOfBattle extends BaseMaterial {
 
-    public GiftOfBaelfire() {
-        super("Gift of Baelfire", 500);
+    public GiftOfBattle() {
+        super("Gift of Battle", 0);
     }
     
 }

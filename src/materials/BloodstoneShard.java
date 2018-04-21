@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodgortfactory.materials;
+package materials;
 
 import abstract_definitions.BaseMaterial;
 
@@ -11,10 +11,10 @@ import abstract_definitions.BaseMaterial;
  *
  * @author Bálint
  */
-public class IcyRunestone extends BaseMaterial{
+public class BloodstoneShard extends BaseMaterial {
 
-    public IcyRunestone() {
-        super("Icy Runestone", 10000);
+    public BloodstoneShard() {
+        super("Bloodstone Shard", 2000000);
     }
     
 }

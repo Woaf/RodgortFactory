@@ -7,10 +7,10 @@ package craftcomponents;
 
 import javafx.util.Pair;
 import abstract_definitions.CraftComponent;
-import rodgortfactory.materials.BottleOfElonianWine;
-import rodgortfactory.materials.Moltencore;
-import rodgortfactory.materials.MysticCrystal;
-import rodgortfactory.materials.PileofCrystallineDust;
+import materials.BottleOfElonianWine;
+import materials.Moltencore;
+import materials.MysticCrystal;
+import materials.PileofCrystallineDust;
 
 /**
  *

@@ -7,10 +7,10 @@ package craftcomponents;
 
 import abstract_definitions.CraftComponent;
 import javafx.util.Pair;
-import rodgortfactory.materials.BloodstoneShard;
-import rodgortfactory.materials.GiftOfBattle;
-import rodgortfactory.materials.GiftOfExploration;
-import rodgortfactory.materials.ObsidianShard;
+import materials.BloodstoneShard;
+import materials.GiftOfBattle;
+import materials.GiftOfExploration;
+import materials.ObsidianShard;
 
 /**
  *

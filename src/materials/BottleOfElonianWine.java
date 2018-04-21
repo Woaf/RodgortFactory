@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodgortfactory.materials;
+package materials;
 
 import abstract_definitions.BaseMaterial;
 
@@ -11,10 +11,10 @@ import abstract_definitions.BaseMaterial;
  *
  * @author Bálint
  */
-public class ViciousClaw extends BaseMaterial {
+public class BottleOfElonianWine extends BaseMaterial {
 
-    public ViciousClaw() {
-        super("Vicious Claw", 1866);
+    public BottleOfElonianWine() {
+        super("Bottle of Elonian Wine", 2504);
     }
     
 }

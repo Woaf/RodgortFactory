@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodgortfactory.materials;
+package guildmembers;
 
-import abstract_definitions.BaseMaterial;
+import abstract_definitions.GuildMember;
 
 /**
  *
  * @author Bálint
  */
-public class PileofCrystallineDust extends BaseMaterial {
+public class CheraFox extends GuildMember {
 
-    public PileofCrystallineDust() {
-        super("Pile of Crystalline Dust", 815);
+    public CheraFox() {
+        super("Chera Fox");
     }
     
 }

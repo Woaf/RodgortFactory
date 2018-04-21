@@ -7,10 +7,10 @@ package craftcomponents;
 
 import javafx.util.Pair;
 import abstract_definitions.CraftComponent;
-import rodgortfactory.materials.GlobOfEctoplasm;
-import rodgortfactory.materials.MysticCoin;
-import rodgortfactory.materials.ObsidianShard;
-import rodgortfactory.materials.PhilosophersStone;
+import materials.GlobOfEctoplasm;
+import materials.MysticCoin;
+import materials.ObsidianShard;
+import materials.PhilosophersStone;
 
 /**
  *

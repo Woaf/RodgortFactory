@@ -7,8 +7,8 @@ package craftcomponents;
 
 import abstract_definitions.CraftComponent;
 import javafx.util.Pair;
-import rodgortfactory.materials.IcyRunestone;
-import rodgortfactory.materials.SuperiorSigilOfFire;
+import materials.IcyRunestone;
+import materials.SuperiorSigilOfFire;
 
 /**
  *

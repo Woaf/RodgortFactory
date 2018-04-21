@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodgortfactory.materials;
+package materials;
 
 import abstract_definitions.BaseMaterial;
 
@@ -11,10 +11,10 @@ import abstract_definitions.BaseMaterial;
  *
  * @author Bálint
  */
-public class ObsidianShard extends BaseMaterial {
+public class VialOfPowerfullBlood extends BaseMaterial {
 
-    public ObsidianShard() {
-        super("Obsidian Shard", 210000);
+    public VialOfPowerfullBlood() {
+        super("Vial of Powerfull Blood", 2712);
     }
     
 }

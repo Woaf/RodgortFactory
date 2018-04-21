@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rodgortfactory.materials;
+package materials;
 
 import abstract_definitions.BaseMaterial;
 
@@ -11,10 +11,10 @@ import abstract_definitions.BaseMaterial;
  *
  * @author Bálint
  */
-public class GlobOfEctoplasm extends BaseMaterial {
+public class GiftOfBaelfire extends BaseMaterial {
 
-    public GlobOfEctoplasm() {
-        super("Glob of Ectoplasm", 1350);
+    public GiftOfBaelfire() {
+        super("Gift of Baelfire", 500);
     }
     
 }

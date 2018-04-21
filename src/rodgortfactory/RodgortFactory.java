@@ -5,10 +5,8 @@
  */
 package rodgortfactory;
 
-import abstract_definitions.CraftComponent;
-import abstract_definitions.CraftingItem;
-import craftcomponents.MysticClover;
-import craftcomponents.Rodgort;
+import abstract_definitions.GuildMember;
+import guildmembers.CheraFox;
 
 /**
  *
@@ -20,7 +18,7 @@ public class RodgortFactory {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        CraftComponent rodgort = new Rodgort();
-        System.out.println(rodgort.toString());   
+        GuildMember gwenn = new CheraFox();
+        System.out.println(gwenn.toString());
     }   
 }

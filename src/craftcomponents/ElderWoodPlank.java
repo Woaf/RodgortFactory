@@ -7,7 +7,7 @@ package craftcomponents;
 
 import javafx.util.Pair;
 import abstract_definitions.CraftComponent;
-import rodgortfactory.materials.ElderWoodLog;
+import materials.ElderWoodLog;
 
 /**
  *
