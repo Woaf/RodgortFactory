@@ -5,38 +5,17 @@
  */
 package guildmembers;
 
-import abstract_definitions.BaseMaterial;
+import abstract_definitions.CraftingItem;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import materials.AncientBone;
-import materials.AncientWoodPlank;
-import materials.ArmoredScale;
-import materials.BloodstoneShard;
-import materials.BottleOfElonianWine;
-import materials.DestroyerCore;
-import materials.ElaborateTotem;
-import materials.ElderWoodLog;
-import materials.GhostPepper;
-import materials.GiftOfBaelfire;
-import materials.GiftOfBattle;
-import materials.GiftOfExploration;
-import materials.GlobOfEctoplasm;
-import materials.HardWoodLog;
-import materials.IcyRunestone;
-import materials.Moltencore;
-import materials.MysticCoin;
-import materials.MysticCrystal;
-import materials.ObsidianShard;
-import materials.PhilosophersStone;
-import materials.PileofCrystallineDust;
-import materials.PowerfullVenomSac;
-import materials.RodgortsFlame;
-import materials.SeasonedWoodLog;
-import materials.SuperiorSigilOfFire;
-import materials.VialOfPowerfullBlood;
-import materials.ViciousClaw;
-import materials.ViciousFang;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import rodgortfactory.GuildBank;
+import rodgortfactory.RodgortFactory;
 
 /**
  *
@@ -46,40 +25,40 @@ public class GuildMaster2 {
     
     private final String name;
     private final String Id;
-    private final List<BaseMaterial> listOfMaterials;
+    private final List<String> listOfMaterials;
     
     private GuildMaster2(String name) {
         this.name = name;
         this.Id = name.replaceAll("\\s", "").toLowerCase() + ".#" + generateRandomSequence();
         listOfMaterials = new ArrayList<>();
-        listOfMaterials.add(new AncientBone());
-        listOfMaterials.add(new AncientWoodPlank());
-        listOfMaterials.add(new ArmoredScale());
-        listOfMaterials.add(new BloodstoneShard());
-        listOfMaterials.add(new BottleOfElonianWine());
-        listOfMaterials.add(new DestroyerCore());
-        listOfMaterials.add(new ElaborateTotem());
-        listOfMaterials.add(new ElderWoodLog());
-        listOfMaterials.add(new GhostPepper());
-        listOfMaterials.add(new GiftOfBaelfire());
-        listOfMaterials.add(new GiftOfBattle());
-        listOfMaterials.add(new GiftOfExploration());
-        listOfMaterials.add(new GlobOfEctoplasm());
-        listOfMaterials.add(new HardWoodLog());
-        listOfMaterials.add(new IcyRunestone());
-        listOfMaterials.add(new Moltencore());
-        listOfMaterials.add(new MysticCoin());
-        listOfMaterials.add(new MysticCrystal());
-        listOfMaterials.add(new ObsidianShard());
-        listOfMaterials.add(new PhilosophersStone());
-        listOfMaterials.add(new PileofCrystallineDust());
-        listOfMaterials.add(new PowerfullVenomSac());
-        listOfMaterials.add(new RodgortsFlame());
-        listOfMaterials.add(new SeasonedWoodLog());
-        listOfMaterials.add(new SuperiorSigilOfFire());
-        listOfMaterials.add(new VialOfPowerfullBlood());
-        listOfMaterials.add(new ViciousClaw());
-        listOfMaterials.add(new ViciousFang());
+        listOfMaterials.add("AncientBone");
+        listOfMaterials.add("AncientWoodPlank");
+        listOfMaterials.add("ArmoredScale");
+        listOfMaterials.add("BloodstoneShard");
+        listOfMaterials.add("BottleOfElonianWine");
+        listOfMaterials.add("DestroyerCore");
+        listOfMaterials.add("ElaborateTotem");
+        listOfMaterials.add("ElderWoodLog");
+        listOfMaterials.add("GhostPepper");
+        listOfMaterials.add("GiftOfBaelfire");
+        listOfMaterials.add("GiftOfBattle");
+        listOfMaterials.add("GiftOfExploration");
+        listOfMaterials.add("GlobOfEctoplasm");
+        listOfMaterials.add("HardWoodLog");
+        listOfMaterials.add("IcyRunestone");
+        listOfMaterials.add("Moltencore");
+        listOfMaterials.add("MysticCoin");
+        listOfMaterials.add("MysticCrystal");
+        listOfMaterials.add("ObsidianShard");
+        listOfMaterials.add("PhilosophersStone");
+        listOfMaterials.add("PileofCrystallineDust");
+        listOfMaterials.add("PowerfulVenomSac");
+        listOfMaterials.add("RodgortsFlame");
+        listOfMaterials.add("SeasonedWoodLog");
+        listOfMaterials.add("SuperiorSigilOfFire");
+        listOfMaterials.add("VialOfPowerfulBlood");
+        listOfMaterials.add("ViciousClaw");
+        listOfMaterials.add("ViciousFang");
     }
     
     private static int generateRandomSequence() {
@@ -101,6 +80,35 @@ public class GuildMaster2 {
         return "GuildMaster2{" + "name=" + name + ", Id=" + Id + ", listOfMaterials=" + listOfMaterials + '}';
     }
     
-    
-    
+    public void fillInventory(GuildBank bank){
+        
+        for(String s : listOfMaterials)
+        {
+            Class<?> object;
+            try {
+                object = Class.forName("materials." + s);
+                Constructor<?> constructor = object.getConstructor();
+                Object shard = constructor.newInstance();
+                
+                bank.addToBank((CraftingItem) shard);
+
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(RodgortFactory.class.getName()).log(Level.SEVERE, null, ex);
+            }   catch (NoSuchMethodException ex) { 
+                Logger.getLogger(GuildMaster2.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SecurityException ex) {
+                Logger.getLogger(GuildMaster2.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(GuildMaster2.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(GuildMaster2.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(GuildMaster2.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvocationTargetException ex) {
+                Logger.getLogger(GuildMaster2.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+
+        }
+    }
 }

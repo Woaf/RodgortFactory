@@ -17,9 +17,11 @@ public class RodgortFactory {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        GuildMaster2 a = GuildMaster2.getInstance();
-        GuildMaster2 b = GuildMaster2.getInstance();
         
-        System.out.println(b.equals(a));
+        GuildBank bank = new GuildBank();
+        GuildMaster2 gm = GuildMaster2.getInstance();
+        
+        gm.fillInventory(bank);
+        
     }   
 }

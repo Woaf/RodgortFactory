@@ -11,10 +11,10 @@ import abstract_definitions.BaseMaterial;
  *
  * @author Bálint
  */
-public class VialOfPowerfullBlood extends BaseMaterial {
+public class PowerfulVenomSac extends BaseMaterial {
 
-    public VialOfPowerfullBlood() {
-        super("Vial of Powerfull Blood", 2712);
+    public PowerfulVenomSac() {
+        super("Powerfull Venom Sac", 1702);
     }
     
 }

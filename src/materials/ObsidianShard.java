@@ -17,4 +17,9 @@ public class ObsidianShard extends BaseMaterial {
         super("Obsidian Shard", 210000);
     }
     
+    public void asdf()
+    {
+        System.out.println("Im an obsidian shard");
+    }
+    
 }

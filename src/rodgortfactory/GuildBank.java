@@ -7,6 +7,7 @@ package rodgortfactory;
 
 import abstract_definitions.CraftingItem;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,6 +15,16 @@ import java.util.ArrayList;
  */
 public class GuildBank {
     
-    private ArrayList<CraftingItem> bank;
+    private List<CraftingItem> bank;
+
+    public GuildBank() {
+        this.bank = new ArrayList<>();
+    }
+
+    public void addToBank(CraftingItem item)
+    {
+        bank.add(item);
+        System.out.println("Item added: " + item.toString());
+    }
     
 }

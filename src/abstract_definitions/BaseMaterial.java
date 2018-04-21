@@ -22,6 +22,13 @@ public abstract class BaseMaterial extends CraftingItem {
         this.price = price;
         System.out.println("One " + this.name + " created.");
     }
+    
+    public void increment()
+    {
+        int oldSize = stack_count;
+        this.stack_count++;
+        System.out.println("Stack incremented. Old size: " + oldSize + ". New size: " + stack_count);
+    }
 
     @Override
     public String toString() {
