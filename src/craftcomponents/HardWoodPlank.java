@@ -17,7 +17,7 @@ public class HardWoodPlank extends CraftComponent {
 
     public HardWoodPlank() {
         super("Hard Wood Plank");
-        super.materials.add(new Pair(new HardWoodLog(), 750));
+        super.materials.add(new Pair(new HardWoodLog(), 3));
     }
     
 }

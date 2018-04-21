@@ -18,6 +18,7 @@ public abstract class CraftingItem {
     protected CraftingItem(String name){
         this.name = name;
         this.stack_count = 0;
+        //System.out.println("One " + this.name + " created.");
     }
     
     public int getStack_count() {
@@ -34,13 +35,13 @@ public abstract class CraftingItem {
     
     public void increment()
     {
-        int oldSize = stack_count;
+        //int oldSize = stack_count;
         this.stack_count++;
     }
     
     public void decrement()
     {
-        int oldSize = stack_count;
+        //int oldSize = stack_count;
         this.stack_count--;
     }
     

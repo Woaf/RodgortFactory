@@ -6,10 +6,10 @@
 package rodgortfactory;
 
 import abstract_definitions.GuildMember;
+import craftcomponents.GiftOfWood;
 import guildmembers.Aslaeya;
 import guildmembers.GuildMaster;
 import java.util.Random;
-import materials.ObsidianShard;
 
 /**
  *
@@ -39,7 +39,7 @@ public class RodgortFactory {
         System.out.println(bank.toString());
         
         GuildMember member = new Aslaeya();
-        member.grabMaterials(bank, new ObsidianShard(), 4);
+        member.grabMaterials(bank, new GiftOfWood(), 4);
         
     }   
 }

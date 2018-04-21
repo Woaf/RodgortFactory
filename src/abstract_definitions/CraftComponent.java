@@ -22,7 +22,6 @@ public abstract class CraftComponent extends CraftingItem {
         this.price = 0;
         this.stack_count = 0;
         this.materials = new ArrayList<>();
-        System.out.println("One " + this.name + " created.");
     }
     
     @Override

@@ -35,6 +35,18 @@ public abstract class GuildMember {
     public String toString() {
         return "Player name: " + name + "\t\t User ID: " + playerId;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPlayerId() {
+        return playerId;
+    }
+
+    public List<CraftingItem> getClaimedMaterials() {
+        return claimedMaterials;
+    }
     
     public void grabMaterials(GuildBank bank, CraftingItem item, int count){
         bank.getBank().forEach((material) -> {
@@ -45,6 +57,7 @@ public abstract class GuildMember {
                     System.out.println("Removing [" + count + "] pieces of: " + material.getName());
                     for(int i = 0; i < count; i++)
                     {
+                        //claimedMaterials.add(material);
                         material.decrement();
                     }
                 }

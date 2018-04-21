@@ -17,6 +17,6 @@ public class ElderWoodPlank extends CraftComponent {
 
     public ElderWoodPlank() {
         super("Elder Wood Plank");
-        super.materials.add(new Pair(new ElderWoodLog(), 750));
+        super.materials.add(new Pair(new ElderWoodLog(), 3));
     }
 }

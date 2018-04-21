@@ -20,9 +20,9 @@ public class MysticClover extends CraftComponent {
     
     public MysticClover() {
         super("Mystic Clover");
-        super.materials.add(new Pair(new ObsidianShard(), 249));
-        super.materials.add(new Pair(new MysticCoin(), 249));
-        super.materials.add(new Pair(new GlobOfEctoplasm(), 249));
-        super.materials.add(new Pair(new PhilosophersStone(), 1494));   
+        super.materials.add(new Pair(new ObsidianShard(), 4));
+        super.materials.add(new Pair(new MysticCoin(), 4));
+        super.materials.add(new Pair(new GlobOfEctoplasm(), 4));
+        super.materials.add(new Pair(new PhilosophersStone(), 24));   
     }
 }

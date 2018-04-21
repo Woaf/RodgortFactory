@@ -16,7 +16,6 @@ public abstract class BaseMaterial extends CraftingItem {
         super(name);
         this.price = price;
         this.stack_count = 0;
-        System.out.println("One " + name + " created.");
     }
 
     public void setStack_count(int stack_count) {

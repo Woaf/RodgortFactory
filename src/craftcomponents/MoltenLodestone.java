@@ -20,10 +20,10 @@ public class MoltenLodestone extends CraftComponent {
 
     public MoltenLodestone() {
         super("Molten Lodestone");
-        super.materials.add(new Pair(new BottleOfElonianWine(), 100));
-        super.materials.add(new Pair(new PileofCrystallineDust(), 100));
-        super.materials.add(new Pair(new MysticCrystal(), 100));
-        super.materials.add(new Pair(new Moltencore(), 200));
+        super.materials.add(new Pair(new BottleOfElonianWine(), 1));
+        super.materials.add(new Pair(new PileofCrystallineDust(), 1));
+        super.materials.add(new Pair(new MysticCrystal(), 1));
+        super.materials.add(new Pair(new Moltencore(), 2));
     }
     
 }
