@@ -5,11 +5,7 @@
  */
 package rodgortfactory;
 
-import abstract_definitions.GuildMember;
-import guildmembers.Aslaeya;
-import guildmembers.CheraFox;
-import guildmembers.EvomDeathspur;
-import guildmembers.FeronDeathspur;
+import guildmembers.GuildMaster2;
 
 /**
  *
@@ -21,13 +17,9 @@ public class RodgortFactory {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        GuildMember gwenn = new CheraFox();
-        GuildMember woaf  = new Aslaeya();
-        GuildMember woaf2 = new EvomDeathspur();
-        GuildMember woaf3 = new FeronDeathspur();
-        System.out.println(gwenn.toString());
-        System.out.println(woaf.toString());
-        System.out.println(woaf2.toString());
-        System.out.println(woaf3.toString());
+        GuildMaster2 a = GuildMaster2.getInstance();
+        GuildMaster2 b = GuildMaster2.getInstance();
+        
+        System.out.println(b.equals(a));
     }   
 }
