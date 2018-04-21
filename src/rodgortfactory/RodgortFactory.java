@@ -5,7 +5,11 @@
  */
 package rodgortfactory;
 
-import guildmembers.GuildMaster2;
+import abstract_definitions.GuildMember;
+import guildmembers.Aslaeya;
+import guildmembers.GuildMaster;
+import java.util.Random;
+import materials.ObsidianShard;
 
 /**
  *
@@ -19,9 +23,23 @@ public class RodgortFactory {
     public static void main(String[] args) {
         
         GuildBank bank = new GuildBank();
-        GuildMaster2 gm = GuildMaster2.getInstance();
-        
+        GuildMaster gm = GuildMaster.getInstance();
         gm.fillInventory(bank);
+        
+        System.out.println(bank.getSize());
+        System.out.println(bank.toString());
+        
+        
+        gm.getListOfMaterials().forEach((material) -> {
+            Random rand = new Random();
+            int inc = rand.nextInt(20) + 1;
+            gm.addToInventory(bank, material, inc);
+        });
+        
+        System.out.println(bank.toString());
+        
+        GuildMember member = new Aslaeya();
+        member.grabMaterials(bank, new ObsidianShard(), 4);
         
     }   
 }

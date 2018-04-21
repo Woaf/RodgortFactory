@@ -14,7 +14,7 @@ import abstract_definitions.BaseMaterial;
 public class VialOfPowerfulBlood extends BaseMaterial {
 
     public VialOfPowerfulBlood() {
-        super("Vial of Powerfull Blood", 2712);
+        super("Vial of Powerful Blood", 2712);
     }
     
 }

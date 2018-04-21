@@ -6,6 +6,7 @@
 package guildmembers;
 
 import abstract_definitions.GuildMember;
+import rodgortfactory.GuildBank;
 
 /**
  *
@@ -15,6 +16,11 @@ public class Aslaeya extends GuildMember {
 
     public Aslaeya() {
         super("Aslaeya");
+    }
+    
+    public void createDestroyerLodestone(GuildBank bank)
+    {
+        
     }
     
 }

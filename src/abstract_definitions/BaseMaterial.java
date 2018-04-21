@@ -10,24 +10,17 @@ package abstract_definitions;
  * @author Bálint
  */
 public abstract class BaseMaterial extends CraftingItem {
-
-    protected int stack_count;
-    protected String name;
-    protected int price;
     
     protected BaseMaterial(String name, int price)
     {
-        this.stack_count = 0;
-        this.name = name;
+        super(name);
         this.price = price;
-        System.out.println("One " + this.name + " created.");
+        this.stack_count = 0;
+        System.out.println("One " + name + " created.");
     }
-    
-    public void increment()
-    {
-        int oldSize = stack_count;
-        this.stack_count++;
-        System.out.println("Stack incremented. Old size: " + oldSize + ". New size: " + stack_count);
+
+    public void setStack_count(int stack_count) {
+        this.stack_count = stack_count;
     }
 
     @Override

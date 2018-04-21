@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class GuildBank {
     
-    private List<CraftingItem> bank;
+    private final List<CraftingItem> bank;
 
     public GuildBank() {
         this.bank = new ArrayList<>();
@@ -25,6 +25,24 @@ public class GuildBank {
     {
         bank.add(item);
         System.out.println("Item added: " + item.toString());
+    }
+    
+    public int getSize()
+    {
+        return bank.size();
+    }
+
+    public List<CraftingItem> getBank() {
+        return bank;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder bank_status = new StringBuilder("Bank contents:\n");
+        bank.forEach((material) -> {
+            bank_status.append(material.getName()).append(": ").append(material.getStack_count()).append("\n");
+        });
+        return bank_status.toString();
     }
     
 }

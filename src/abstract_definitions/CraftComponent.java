@@ -14,16 +14,17 @@ import javafx.util.Pair;
  */
 public abstract class CraftComponent extends CraftingItem {
     
-    protected String name;
     protected ArrayList<Pair<CraftingItem, Integer>> materials;
     
     protected CraftComponent(String name)
     {
+        super(name);
+        this.price = 0;
+        this.stack_count = 0;
         this.materials = new ArrayList<>();
-        this.name = name;
         System.out.println("One " + this.name + " created.");
     }
-
+    
     @Override
     public String toString() {
         return "Craft Item name: " + name;

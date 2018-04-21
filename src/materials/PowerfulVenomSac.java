@@ -14,7 +14,7 @@ import abstract_definitions.BaseMaterial;
 public class PowerfulVenomSac extends BaseMaterial {
 
     public PowerfulVenomSac() {
-        super("Powerfull Venom Sac", 1702);
+        super("Powerful Venom Sac", 1702);
     }
     
 }
