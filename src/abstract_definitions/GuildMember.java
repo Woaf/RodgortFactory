@@ -18,7 +18,7 @@ public abstract class GuildMember {
 
     public GuildMember(String name) {
         this.name = name;
-        this.playerId = name.toLowerCase() + ".#" + generateRandomSequence();
+        this.playerId = name.replaceAll("\\s", "").toLowerCase() + ".#" + generateRandomSequence();
     }
 
     private static int generateRandomSequence() {
