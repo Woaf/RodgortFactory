@@ -6,7 +6,6 @@
 package rodgortfactory;
 
 import abstract_definitions.GuildMember;
-import craftcomponents.GiftOfWood;
 import guildmembers.Aslaeya;
 import guildmembers.GuildMaster;
 import java.util.Random;
@@ -30,7 +29,7 @@ public class RodgortFactory {
         System.out.println(bank.toString());
         
         
-        gm.getListOfMaterials().forEach((material) -> {
+        gm.getListOfBaseMaterials().forEach((material) -> {
             Random rand = new Random();
             int inc = rand.nextInt(20) + 1;
             gm.addToInventory(bank, material, inc);
@@ -39,7 +38,7 @@ public class RodgortFactory {
         System.out.println(bank.toString());
         
         GuildMember member = new Aslaeya();
-        member.grabMaterials(bank, new GiftOfWood(), 4);
+        
         
     }   
 }

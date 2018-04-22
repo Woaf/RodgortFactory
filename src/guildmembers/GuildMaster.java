@@ -20,40 +20,40 @@ public class GuildMaster {
     
     private final String name;
     private final String Id;
-    private final List<String> listOfMaterials;
+    private final List<String> listOfBaseMaterials;
     
     private GuildMaster(String name) {
         this.name = name;
         this.Id = name.replaceAll("\\s", "").toLowerCase() + ".#" + generateRandomSequence();
-        listOfMaterials = new ArrayList<>();
-        listOfMaterials.add("AncientBone");
-        listOfMaterials.add("AncientWoodPlank");
-        listOfMaterials.add("ArmoredScale");
-        listOfMaterials.add("BloodstoneShard");
-        listOfMaterials.add("BottleOfElonianWine");
-        listOfMaterials.add("DestroyerCore");
-        listOfMaterials.add("ElaborateTotem");
-        listOfMaterials.add("ElderWoodLog");
-        listOfMaterials.add("GhostPepper");
-        listOfMaterials.add("GiftOfBaelfire");
-        listOfMaterials.add("GiftOfBattle");
-        listOfMaterials.add("GiftOfExploration");
-        listOfMaterials.add("GlobOfEctoplasm");
-        listOfMaterials.add("HardWoodLog");
-        listOfMaterials.add("IcyRunestone");
-        listOfMaterials.add("Moltencore");
-        listOfMaterials.add("MysticCoin");
-        listOfMaterials.add("MysticCrystal");
-        listOfMaterials.add("ObsidianShard");
-        listOfMaterials.add("PhilosophersStone");
-        listOfMaterials.add("PileofCrystallineDust");
-        listOfMaterials.add("PowerfulVenomSac");
-        listOfMaterials.add("RodgortsFlame");
-        listOfMaterials.add("SeasonedWoodLog");
-        listOfMaterials.add("SuperiorSigilOfFire");
-        listOfMaterials.add("VialOfPowerfulBlood");
-        listOfMaterials.add("ViciousClaw");
-        listOfMaterials.add("ViciousFang");
+        listOfBaseMaterials = new ArrayList<>();
+        listOfBaseMaterials.add("AncientBone");
+        listOfBaseMaterials.add("AncientWoodPlank");
+        listOfBaseMaterials.add("ArmoredScale");
+        listOfBaseMaterials.add("BloodstoneShard");
+        listOfBaseMaterials.add("BottleOfElonianWine");
+        listOfBaseMaterials.add("DestroyerCore");
+        listOfBaseMaterials.add("ElaborateTotem");
+        listOfBaseMaterials.add("ElderWoodLog");
+        listOfBaseMaterials.add("GhostPepper");
+        listOfBaseMaterials.add("GiftOfBaelfire");
+        listOfBaseMaterials.add("GiftOfBattle");
+        listOfBaseMaterials.add("GiftOfExploration");
+        listOfBaseMaterials.add("GlobOfEctoplasm");
+        listOfBaseMaterials.add("HardWoodLog");
+        listOfBaseMaterials.add("IcyRunestone");
+        listOfBaseMaterials.add("Moltencore");
+        listOfBaseMaterials.add("MysticCoin");
+        listOfBaseMaterials.add("MysticCrystal");
+        listOfBaseMaterials.add("ObsidianShard");
+        listOfBaseMaterials.add("PhilosophersStone");
+        listOfBaseMaterials.add("PileofCrystallineDust");
+        listOfBaseMaterials.add("PowerfulVenomSac");
+        listOfBaseMaterials.add("RodgortsFlame");
+        listOfBaseMaterials.add("SeasonedWoodLog");
+        listOfBaseMaterials.add("SuperiorSigilOfFire");
+        listOfBaseMaterials.add("VialOfPowerfulBlood");
+        listOfBaseMaterials.add("ViciousClaw");
+        listOfBaseMaterials.add("ViciousFang");
     }
     
     private static int generateRandomSequence() {
@@ -72,7 +72,7 @@ public class GuildMaster {
 
     @Override
     public String toString() {
-        return "Guild Master: " + name + "\t\t\t Player ID: " + Id + "\n List of materials: " + listOfMaterials;
+        return "Guild Master: " + name + "\t\t\t Player ID: " + Id + "\n List of materials: " + listOfBaseMaterials;
     }
 
     public String getName() {
@@ -83,13 +83,13 @@ public class GuildMaster {
         return Id;
     }
 
-    public List<String> getListOfMaterials() {
-        return listOfMaterials;
+    public List<String> getListOfBaseMaterials() {
+        return listOfBaseMaterials;
     }
     
     public void fillInventory(GuildBank bank){
         
-        listOfMaterials.forEach((material) -> {
+        listOfBaseMaterials.forEach((material) -> {
             Class<?> object;
             try {
                 object = Class.forName("materials." + material);
