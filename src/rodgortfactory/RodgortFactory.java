@@ -6,7 +6,6 @@
 package rodgortfactory;
 
 import abstract_definitions.GuildMember;
-import guildmembers.Aslaeya;
 import guildmembers.GuildMaster;
 import java.util.Random;
 
@@ -25,7 +24,7 @@ public class RodgortFactory {
         GuildMaster gm = GuildMaster.getInstance();
         gm.fillInventory(bank);
         
-        System.out.println(bank.getSize());
+        System.out.printf("\nNumber of types of materialis in the bank: %d\n", bank.getSize());
         System.out.println(bank.toString());
         
         
@@ -37,7 +36,8 @@ public class RodgortFactory {
         
         System.out.println(bank.toString());
         
-        GuildMember member = new Aslaeya();
+        GuildMember member = new GuildMember("WoafTheWolf");
+        member.run();
         
         
     }   
