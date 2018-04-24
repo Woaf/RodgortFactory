@@ -21,6 +21,7 @@ public class GuildMaster {
     private final String name;
     private final String Id;
     private final List<String> listOfBaseMaterials;
+    public GuildBank bank;
     
     private GuildMaster(String name) {
         this.name = name;
@@ -54,6 +55,8 @@ public class GuildMaster {
         listOfBaseMaterials.add("VialOfPowerfulBlood");
         listOfBaseMaterials.add("ViciousClaw");
         listOfBaseMaterials.add("ViciousFang");
+        
+        bank = GuildBank.getInstance();
     }
     
     private static int generateRandomSequence() {
@@ -61,15 +64,15 @@ public class GuildMaster {
         return random.nextInt(8999) + 1000;
     }
     
+    private static GuildMaster instance = null;
+    
     public static GuildMaster getInstance() {
-        return GuildMaster2Holder.INSTANCE;
+        if(instance == null){
+            instance = new GuildMaster("Matthew Mercer");
+        }
+        return instance;
     }
     
-    private static class GuildMaster2Holder {
-
-        private static final GuildMaster INSTANCE = new GuildMaster("Matthew Mercer");
-    }
-
     @Override
     public String toString() {
         return "Guild Master: " + name + "\t\t\t Player ID: " + Id + "\n List of materials: " + listOfBaseMaterials;
@@ -87,7 +90,7 @@ public class GuildMaster {
         return listOfBaseMaterials;
     }
     
-    public void fillInventory(GuildBank bank){
+    public void fillInventory(){
         
         listOfBaseMaterials.forEach((material) -> {
             Class<?> object;
@@ -105,7 +108,7 @@ public class GuildMaster {
         });
     }
     
-    public void addToInventory(GuildBank bank, String itemName, int number)
+    public void addToInventory(String itemName, int number)
     {
         bank.getBank().forEach((material) -> {
             if(material.getClass().getSimpleName().equals(itemName))

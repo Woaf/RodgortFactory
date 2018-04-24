@@ -6,6 +6,7 @@
 package rodgortfactory;
 
 import abstract_definitions.CraftingItem;
+import guildmembers.GuildMaster;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +17,21 @@ import java.util.List;
 public class GuildBank {
     
     private final List<CraftingItem> bank;
+    private final String name;
 
-    public GuildBank() {
+    private GuildBank(String name) {
+        this.name = name;
         this.bank = new ArrayList<>();
+    }
+    
+    private static GuildBank instance = null;
+    
+    public static GuildBank getInstance() {
+        if(instance == null)
+        {
+            instance = new GuildBank("Guild master");
+        }
+        return instance;
     }
 
     public void addToBank(CraftingItem item)

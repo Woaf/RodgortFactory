@@ -5,9 +5,7 @@
  */
 package rodgortfactory;
 
-import abstract_definitions.GuildMember;
 import guildmembers.GuildMaster;
-import java.util.Random;
 
 /**
  *
@@ -20,24 +18,22 @@ public class RodgortFactory {
      */
     public static void main(String[] args) {
         
-        GuildBank bank = new GuildBank();
         GuildMaster gm = GuildMaster.getInstance();
-        gm.fillInventory(bank);
+        gm.fillInventory();
         
-        System.out.printf("\nNumber of types of materialis in the bank: %d\n", bank.getSize());
-        System.out.println(bank.toString());
+        //Random rand = new Random();
+        //gm.getListOfBaseMaterials().forEach((material) -> {
+        //    int inc = rand.nextInt(20) + 1;
+        //    gm.addToInventory(material, inc);
+        //});
+        
+        //GuildMember robot = new GuildMember("Chera Fox", gm.bank);
+        //System.out.println(robot.toString());
+        
+        //GuildMember member = new GuildMember("WoafTheWolf", bank);
+        //member.run();
         
         
-        gm.getListOfBaseMaterials().forEach((material) -> {
-            Random rand = new Random();
-            int inc = rand.nextInt(20) + 1;
-            gm.addToInventory(bank, material, inc);
-        });
-        
-        System.out.println(bank.toString());
-        
-        GuildMember member = new GuildMember("WoafTheWolf");
-        member.run();
         
         
     }   
