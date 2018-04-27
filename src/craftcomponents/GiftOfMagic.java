@@ -8,7 +8,7 @@ package craftcomponents;
 import abstract_definitions.CraftComponent;
 import javafx.util.Pair;
 import materials.ElaborateTotem;
-import materials.PileofCrystallineDust;
+import materials.PileOfCrystallineDust;
 import materials.PowerfulVenomSac;
 import materials.VialOfPowerfulBlood;
 
@@ -23,6 +23,6 @@ public class GiftOfMagic extends CraftComponent {
         super.materials.add(new Pair(new VialOfPowerfulBlood(), 250));
         super.materials.add(new Pair(new PowerfulVenomSac(), 250));
         super.materials.add(new Pair(new ElaborateTotem(), 250));
-        super.materials.add(new Pair(new PileofCrystallineDust(), 250));
+        super.materials.add(new Pair(new PileOfCrystallineDust(), 250));
     }
 }

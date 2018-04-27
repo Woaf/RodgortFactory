@@ -5,18 +5,21 @@
  */
 package guildmembers;
 
+import abstract_definitions.BaseMaterial;
 import abstract_definitions.CraftingItem;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rodgortfactory.GuildBank;
 
 /**
  *
  * @author Bálint
  */
-public class GuildMaster {
+public class GuildMaster implements Runnable {
     
     private final String name;
     private final String Id;
@@ -47,7 +50,7 @@ public class GuildMaster {
         listOfBaseMaterials.add("MysticCrystal");
         listOfBaseMaterials.add("ObsidianShard");
         listOfBaseMaterials.add("PhilosophersStone");
-        listOfBaseMaterials.add("PileofCrystallineDust");
+        listOfBaseMaterials.add("PileOfCrystallineDust");
         listOfBaseMaterials.add("PowerfulVenomSac");
         listOfBaseMaterials.add("RodgortsFlame");
         listOfBaseMaterials.add("SeasonedWoodLog");
@@ -90,17 +93,15 @@ public class GuildMaster {
         return listOfBaseMaterials;
     }
     
-    public void fillInventory(){
-        
-        listOfBaseMaterials.forEach((material) -> {
+    public void fillBank(){
+        listOfBaseMaterials.forEach((materialName) -> {
             Class<?> object;
             try {
-                object = Class.forName("materials." + material);
+                object = Class.forName("materials." + materialName);
                 Constructor<?> constructor = object.getConstructor();
                 Object item = constructor.newInstance();
                 
                 bank.addToBank((CraftingItem) item);
-                
                 
             } catch (Exception ex) {
                 System.err.println("Error during Object instantiation from string: " + ex.getMessage());
@@ -108,7 +109,7 @@ public class GuildMaster {
         });
     }
     
-    public void addToInventory(String itemName, int number)
+    public void addToBank(String itemName, int number)
     {
         bank.getBank().forEach((material) -> {
             if(material.getClass().getSimpleName().equals(itemName))
@@ -120,6 +121,33 @@ public class GuildMaster {
                 }
             }
         });
+    }
+
+    @Override
+    public void run() {
+        Random rnd = new Random();
+        int amount;
+        while(true)
+        {
+            try {
+                Thread.sleep(10000);
+                for(CraftingItem material : bank.getBank())
+                {
+                    amount = rnd.nextInt(6)+1;
+                    if(material instanceof BaseMaterial)
+                    {
+                        for(int i = 0; i < amount; i++)
+                        {
+                            material.increment();
+                        }
+                    }
+                }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GuildMaster.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
     }
     
 }

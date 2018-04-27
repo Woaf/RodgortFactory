@@ -6,7 +6,6 @@
 package rodgortfactory;
 
 import abstract_definitions.CraftingItem;
-import guildmembers.GuildMaster;
 import java.util.ArrayList;
 import java.util.List;
 
