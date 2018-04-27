@@ -145,9 +145,8 @@ public class GuildMaster implements Runnable {
             } catch (InterruptedException ex) {
                 Logger.getLogger(GuildMaster.class.getName()).log(Level.SEVERE, null, ex);
             }
+            System.out.println(bank.toString());
         }
-        
-        
     }
     
 }

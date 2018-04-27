@@ -20,29 +20,28 @@ public class RodgortFactory {
      */
     public static void main(String[] args) {
         
+        // Initialize guildmaster
         GuildMaster gm = GuildMaster.getInstance();
         gm.fillBank();
-        
+            // Initilize guild bank
         Random rand = new Random();
         gm.getListOfBaseMaterials().forEach((material) -> {
             int inc = rand.nextInt(20) + 1;
             gm.addToBank(material, inc);
         });
-        
-        
+        // Run guildmaster
         Thread gmRunner = new Thread(gm);
         gmRunner.start();
         
-        GuildMember robot = new GuildMember("Chera Fox", gm.bank);
-        Thread robotRunner = new Thread(robot);
+        //Initilize guild members
+        GuildMember cheraFox = new GuildMember("Chera Fox", gm.bank);
+        GuildMember feron = new GuildMember("Feron Ragemendler", gm.bank);
         
-        robotRunner.start();
-        System.out.println(robot.toString());
+        Thread t_cherafox = new Thread(cheraFox);
+        Thread t_feron = new Thread(feron);
         
-        //GuildMember member = new GuildMember("WoafTheWolf", bank);
-        //member.run();
-        
-        
+        t_cherafox.start();
+        t_feron.start();
         
         
     }   

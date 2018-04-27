@@ -6,6 +6,7 @@
 package abstract_definitions;
 
 import craftcomponents.DestroyerLodestone;
+import craftcomponents.ElderWoodPlank;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import materials.BottleOfElonianWine;
+import materials.ElderWoodLog;
 import materials.Moltencore;
 import materials.MysticCrystal;
 import materials.PileOfCrystallineDust;
@@ -57,6 +59,11 @@ public class GuildMember implements Runnable {
         return "Player name: " + name + "\t\t User ID: " + playerId;
     }
 
+    private int randomIntGenerator(int maxAmount, int addConst) {
+        Random rnd = new Random();
+        return rnd.nextInt(maxAmount) + addConst;
+    }
+
     private void grabMaterials(CraftingItem item, int count) {
         guildBank.getBank().forEach((material) -> {
             if (material.getClass().getSimpleName().equals(item.getClass().getSimpleName())) {
@@ -64,15 +71,13 @@ public class GuildMember implements Runnable {
                     try {
                         //System.out.println("Removing [" + count + "] pieces of: " + material.getName());
                         for (int i = 0; i < count; i++) {
-                        ownInventory.add(material.getClass().newInstance());
-                        material.decrement();
-                    }
-                    } catch (InstantiationException ex) {
-                        Logger.getLogger(GuildMember.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalAccessException ex) {
+                            ownInventory.add(material.getClass().newInstance());
+                            material.decrement();
+                        }
+                    } catch (InstantiationException | IllegalAccessException ex) {
                         Logger.getLogger(GuildMember.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                 }
             }
         });
@@ -80,7 +85,7 @@ public class GuildMember implements Runnable {
     }
 
     private boolean checkMaterialStack(int needs, int contains) {
-        System.out.println("Enough materials in bank: " + (needs <= contains));
+        //System.out.println("Enough materials in bank: " + (needs <= contains));
         return needs <= contains;
     }
 
@@ -96,6 +101,7 @@ public class GuildMember implements Runnable {
             bank.getBank().add(item);
         }
 
+        System.out.printf("%s created something!!!\n", name);
         System.out.println("[" + item.getName() + "] added to the bank.");
         bank.getBank().forEach((material) -> {
             if (material.getClass().getSimpleName().equals(item.getClass().getSimpleName())) {
@@ -104,31 +110,36 @@ public class GuildMember implements Runnable {
         });
     }
 
-    private int randomIntGenerator(int maxAmount, int addConst) {
-        Random rnd = new Random();
-        return rnd.nextInt(maxAmount) + addConst;
-    }
-
-    public void createDestroyerLodestone(int phase, GuildBank bank) {
-        grabMaterials(new BottleOfElonianWine(), randomIntGenerator(1, 1));
-        grabMaterials(new PileOfCrystallineDust(), randomIntGenerator(1, 1));
-        grabMaterials(new MysticCrystal(), randomIntGenerator(1, 1));
-        grabMaterials(new Moltencore(), randomIntGenerator(2, 1));
+    private void createDestroyerLodestone(GuildBank bank) {
 
         if (hasAdequateNumberOfMaterials(new BottleOfElonianWine(), 1)
                 && hasAdequateNumberOfMaterials(new PileOfCrystallineDust(), 1)
                 && hasAdequateNumberOfMaterials(new MysticCrystal(), 1)
                 && hasAdequateNumberOfMaterials(new Moltencore(), 2)) {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA");
             removeItem(new BottleOfElonianWine());
             removeItem(new PileOfCrystallineDust());
             removeItem(new MysticCrystal());
             removeItem(new Moltencore());
             removeItem(new Moltencore());
             addItemToBank(bank, new DestroyerLodestone());
-            System.out.println(bank.toString());
+        } else {
+            grabMaterials(new BottleOfElonianWine(), randomIntGenerator(1, 1));
+            grabMaterials(new PileOfCrystallineDust(), randomIntGenerator(1, 1));
+            grabMaterials(new MysticCrystal(), randomIntGenerator(1, 1));
+            grabMaterials(new Moltencore(), randomIntGenerator(2, 1));
         }
+    }
+    
+    private void createElderWoodPlank(GuildBank bank) {
 
+        if (hasAdequateNumberOfMaterials(new ElderWoodLog(), 3)) {
+            removeItem(new ElderWoodLog());
+            removeItem(new ElderWoodLog());
+            removeItem(new ElderWoodLog());
+            addItemToBank(bank, new ElderWoodPlank());
+        } else {
+            grabMaterials(new ElderWoodLog(), randomIntGenerator(3, 1));
+        }
     }
 
     private boolean hasAdequateNumberOfMaterials(CraftingItem item, int amount) {
@@ -138,38 +149,43 @@ public class GuildMember implements Runnable {
                 .map((_item) -> 1)
                 .reduce(counter, Integer::sum);
 
-        return counter == amount;
+        return counter >= amount;
     }
 
     private void removeItem(CraftingItem item) {
-        
         Iterator<CraftingItem> inventoryIterator = ownInventory.iterator();
-        while(inventoryIterator.hasNext())
-        {
+        while (inventoryIterator.hasNext()) {
             CraftingItem o = inventoryIterator.next();
-            System.out.println("asdfa");
-            if(o.getName().equals(item.getName()))
-            {
+            if (o.getName().equals(item.getName())) {
                 System.out.println("Item removed: " + item.getName());
                 ownInventory.remove(o);
                 break;
             }
         }
-        
     }
 
     @Override
     public void run() {
-        System.out.println(getPlayerId());
-        int temp = 0;
-        while (true) {
-            System.out.println(temp);
-            try {
-                createDestroyerLodestone(1, guildBank);
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                System.err.println("Error in the [" + this.getClass().getName() + "] class Run method!");
-                Logger.getLogger(GuildMember.class.getName()).log(Level.SEVERE, null, ex);
+        synchronized (this) {
+            System.out.println(getPlayerId());
+            while (true) {
+                System.out.printf("[%s] is working on %s\n", name, phase.getPhaseName());
+                try {
+                    switch(phase.getPhaseNumber())
+                    {
+                        case 1: createDestroyerLodestone(guildBank); 
+                                createElderWoodPlank(guildBank);
+                        break;
+                        case 2: break;
+                        case 3: break;
+                        case 4: break;
+                        default: break;
+                    }
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    System.err.println("Error in the [" + this.getClass().getName() + "] class Run method!");
+                    Logger.getLogger(GuildMember.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }

@@ -23,5 +23,13 @@ public enum CraftPhase {
         this.phaseNumber = phaseNumber;
         this.phaseName = phaseName;
     }
+
+    public int getPhaseNumber() {
+        return phaseNumber;
+    }
+
+    public String getPhaseName() {
+        return phaseName;
+    }
     
 }
