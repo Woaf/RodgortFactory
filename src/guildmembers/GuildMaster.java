@@ -154,12 +154,7 @@ public class GuildMaster implements Runnable {
     }
 
     private boolean isFinished() {
-        for (GuildMember member : members) {
-            if (member.getPhase().getPhaseNumber() != 7) {
-                return false;
-            }
-        }
-        return true;
+        return members.stream().noneMatch((member) -> (member.getPhase().getPhaseNumber() != 7));
     }
 
     @Override
@@ -167,7 +162,7 @@ public class GuildMaster implements Runnable {
 
         Random rnd = new Random();
         int amount;
-        while (true) {
+        while (!isFinished()) {
             try {
                 Thread.sleep(1000);
                 for (CraftingItem material : bank.getBank()) {
@@ -225,8 +220,6 @@ public class GuildMaster implements Runnable {
             } catch (InterruptedException ex) {
                 Logger.getLogger(GuildMaster.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            System.out.println("Members: " + members.toString());
 
             System.out.println(bank.toString());
         }
