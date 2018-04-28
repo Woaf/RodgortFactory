@@ -7,18 +7,25 @@ package abstract_definitions;
 
 import craftcomponents.DestroyerLodestone;
 import craftcomponents.ElderWoodPlank;
+import craftcomponents.GiftOfFortune;
+import craftcomponents.GiftOfMagic;
+import craftcomponents.GiftOfMastery;
+import craftcomponents.GiftOfMight;
+import craftcomponents.GiftOfRodgort;
+import craftcomponents.GiftOfWood;
+import craftcomponents.HardWoodPlank;
+import craftcomponents.MoltenLodestone;
+import craftcomponents.MysticClover;
+import craftcomponents.Rodgort;
+import craftcomponents.SeasonedWoodPlank;
+import craftcomponents.VialOfLiquidFlame;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import static rodgortfactory.CraftPhase.*;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import materials.BottleOfElonianWine;
-import materials.ElderWoodLog;
-import materials.Moltencore;
-import materials.MysticCrystal;
-import materials.PileOfCrystallineDust;
+import javafx.util.Pair;
 import rodgortfactory.CraftPhase;
 import rodgortfactory.GuildBank;
 
@@ -34,10 +41,10 @@ public class GuildMember implements Runnable {
     public GuildBank guildBank;
     private List<CraftingItem> ownInventory;
 
-    public GuildMember(String name, GuildBank guildBank) {
+    public GuildMember(String name, GuildBank guildBank, CraftPhase phase) {
         this.name = name;
         this.playerId = name.replaceAll("\\s", "").toLowerCase() + ".#" + randomIntGenerator(8999, 1000);
-        this.phase = PHASE1;
+        this.phase = phase;
         this.ownInventory = new ArrayList<>();
         this.guildBank = guildBank;
     }
@@ -50,6 +57,10 @@ public class GuildMember implements Runnable {
         return playerId;
     }
 
+    public CraftPhase getPhase() {
+        return phase;
+    }
+    
     public void setPhase(CraftPhase phase) {
         this.phase = phase;
     }
@@ -110,35 +121,29 @@ public class GuildMember implements Runnable {
         });
     }
 
-    private void createDestroyerLodestone(GuildBank bank) {
-
-        if (hasAdequateNumberOfMaterials(new BottleOfElonianWine(), 1)
-                && hasAdequateNumberOfMaterials(new PileOfCrystallineDust(), 1)
-                && hasAdequateNumberOfMaterials(new MysticCrystal(), 1)
-                && hasAdequateNumberOfMaterials(new Moltencore(), 2)) {
-            removeItem(new BottleOfElonianWine());
-            removeItem(new PileOfCrystallineDust());
-            removeItem(new MysticCrystal());
-            removeItem(new Moltencore());
-            removeItem(new Moltencore());
-            addItemToBank(bank, new DestroyerLodestone());
-        } else {
-            grabMaterials(new BottleOfElonianWine(), randomIntGenerator(1, 1));
-            grabMaterials(new PileOfCrystallineDust(), randomIntGenerator(1, 1));
-            grabMaterials(new MysticCrystal(), randomIntGenerator(1, 1));
-            grabMaterials(new Moltencore(), randomIntGenerator(2, 1));
+    private void craft(CraftComponent itemToCraft) {
+        boolean hasAllMaterials = true;
+        for (Pair<CraftingItem, Integer> item : itemToCraft.materials) {
+            if (!hasAdequateNumberOfMaterials(item.getKey(), item.getValue())) {
+                hasAllMaterials = false;
+            }
         }
-    }
-    
-    private void createElderWoodPlank(GuildBank bank) {
 
-        if (hasAdequateNumberOfMaterials(new ElderWoodLog(), 3)) {
-            removeItem(new ElderWoodLog());
-            removeItem(new ElderWoodLog());
-            removeItem(new ElderWoodLog());
-            addItemToBank(bank, new ElderWoodPlank());
+        if (hasAllMaterials) {
+            itemToCraft.materials.forEach((item) -> {
+                for (int i = 0; i < item.getValue(); i++) {
+                    try {
+                        removeItem(item.getKey().getClass().newInstance());
+                    } catch (InstantiationException | IllegalAccessException ex) {
+                        Logger.getLogger(GuildMember.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            addItemToBank(guildBank, itemToCraft);
         } else {
-            grabMaterials(new ElderWoodLog(), randomIntGenerator(3, 1));
+            itemToCraft.materials.forEach((item) -> {
+                grabMaterials(item.getKey(), randomIntGenerator(item.getValue(), 1));
+            });
         }
     }
 
@@ -168,20 +173,41 @@ public class GuildMember implements Runnable {
     public void run() {
         synchronized (this) {
             System.out.println(getPlayerId());
-            while (true) {
+            while (this.phase.getPhaseNumber() != 7) {
                 System.out.printf("[%s] is working on %s\n", name, phase.getPhaseName());
                 try {
-                    switch(phase.getPhaseNumber())
-                    {
-                        case 1: createDestroyerLodestone(guildBank); 
-                                createElderWoodPlank(guildBank);
-                        break;
-                        case 2: break;
-                        case 3: break;
-                        case 4: break;
-                        default: break;
+                    switch (phase.getPhaseNumber()) {
+                        case 1:
+                            craft(new DestroyerLodestone());
+                            craft(new MoltenLodestone());
+                            craft(new ElderWoodPlank());
+                            craft(new HardWoodPlank());
+                            craft(new SeasonedWoodPlank());
+                            break;
+                        case 2:
+                            craft(new GiftOfMagic());
+                            craft(new GiftOfMight());
+                            craft(new MysticClover());
+                            craft(new ElderWoodPlank());
+                            craft(new HardWoodPlank());
+                            craft(new SeasonedWoodPlank());
+                            break;
+                        case 3:
+                            craft(new GiftOfWood());
+                            craft(new VialOfLiquidFlame());
+                            break;
+                        case 4:
+                            craft(new GiftOfFortune());
+                            craft(new GiftOfMastery());
+                            break;
+                        case 5: 
+                            craft(new GiftOfRodgort());
+                        case 6:
+                            craft(new Rodgort());
+                        default:
+                            break;
                     }
-                    Thread.sleep(500);
+                    Thread.sleep(100);
                 } catch (InterruptedException ex) {
                     System.err.println("Error in the [" + this.getClass().getName() + "] class Run method!");
                     Logger.getLogger(GuildMember.class.getName()).log(Level.SEVERE, null, ex);

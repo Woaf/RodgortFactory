@@ -14,7 +14,10 @@ public enum CraftPhase {
     PHASE1(1, "Tier 1 phase"),
     PHASE2(2, "Tier 2 phase"),
     PHASE3(3, "Tier 3 phase"),
-    PHASE4(4, "Tier 4 phase");
+    PHASE4(4, "Tier 4 phase"),
+    PHASE5(5, "Tier 5 phase"),
+    PHASE6(6, "Tier 6 phase"),
+    PHASE7(7, "Finished!");
     
     private final int phaseNumber;
     private final String phaseName;

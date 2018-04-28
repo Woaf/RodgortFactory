@@ -7,6 +7,8 @@ package rodgortfactory;
 
 import abstract_definitions.GuildMember;
 import guildmembers.GuildMaster;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -15,6 +17,10 @@ import java.util.Random;
  */
 public class RodgortFactory {
 
+    private void readConfig()
+    {
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -34,14 +40,20 @@ public class RodgortFactory {
         gmRunner.start();
         
         //Initilize guild members
-        GuildMember cheraFox = new GuildMember("Chera Fox", gm.bank);
-        GuildMember feron = new GuildMember("Feron Ragemendler", gm.bank);
+        GuildMember cheraFox = new GuildMember("Chera Fox", gm.bank, CraftPhase.PHASE1);
+        GuildMember feron = new GuildMember("Feron Ragemendler", gm.bank, CraftPhase.PHASE2);
+        gm.members.add(cheraFox);
+        gm.members.add(feron);
         
-        Thread t_cherafox = new Thread(cheraFox);
-        Thread t_feron = new Thread(feron);
+        List<Thread> threads = new ArrayList<>();
         
-        t_cherafox.start();
-        t_feron.start();
+        gm.members.forEach((m) -> {
+            threads.add(new Thread(m));
+        });
+        
+        threads.forEach((thread) -> {
+            thread.start();
+        });
         
         
     }   

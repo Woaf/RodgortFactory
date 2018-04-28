@@ -17,6 +17,6 @@ public class SeasonedWoodPlank extends CraftComponent {
 
     public SeasonedWoodPlank() {
         super("Seasoned Wood Plank");
-        super.materials.add(new Pair(new SeasonedWoodLog(), 750));
+        super.materials.add(new Pair(new SeasonedWoodLog(), 3));
     }
 }
