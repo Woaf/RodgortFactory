@@ -155,11 +155,11 @@ public class GuildMaster implements Runnable {
 
     private boolean isFinished() {
         for (GuildMember member : members) {
-            if (member.getPhase().getPhaseNumber() == 7) {
-                return true;
+            if (member.getPhase().getPhaseNumber() != 7) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -167,7 +167,7 @@ public class GuildMaster implements Runnable {
 
         Random rnd = new Random();
         int amount;
-        while (!isFinished()) {
+        while (true) {
             try {
                 Thread.sleep(1000);
                 for (CraftingItem material : bank.getBank()) {

@@ -202,8 +202,10 @@ public class GuildMember implements Runnable {
                             break;
                         case 5: 
                             craft(new GiftOfRodgort());
+                            break;
                         case 6:
                             craft(new Rodgort());
+                            break;
                         default:
                             break;
                     }
