@@ -9,12 +9,12 @@ import abstract_definitions.BaseMaterial;
 
 /**
  *
- * @author Bálint
+ * @author balin
  */
 public class PileofCrystallineDust extends BaseMaterial {
 
     public PileofCrystallineDust() {
-        super("Pile of Crystalline Dust", 815);
+        super("Pile of Crystalline Dust", 1567);
     }
     
 }
