@@ -60,7 +60,7 @@ public class GuildMember implements Runnable {
             System.err.println("Config file cannot be found!\n[" + ex.getMessage() + ']');
         }
 
-        System.out.format("Guild memebr sleep time: %d\n", ret);
+        System.out.format("Guild member sleep time: %d\n", ret);
         return ret;
     }
 
