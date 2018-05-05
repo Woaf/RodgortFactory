@@ -205,7 +205,7 @@ public class GuildMaster implements Runnable {
         int amount;
         while (!isFinished()) {
             try {
-                Thread.sleep(this.sleepTime);
+                Thread.sleep(sleepTime);
                 synchronized (bank) {
                     for (CraftingItem material : bank.getBank()) {
                         amount = rnd.nextInt(15*members.size()) + 1;
