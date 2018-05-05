@@ -10,7 +10,7 @@ import javafx.util.Pair;
 import materials.BottleOfElonianWine;
 import materials.DestroyerCore;
 import materials.MysticCrystal;
-import materials.PileOfCrystallineDust;
+import materials.PileofCrystallineDust;
 
 /**
  *
@@ -21,7 +21,7 @@ public class DestroyerLodestone extends CraftComponent {
     public DestroyerLodestone() {
         super("Destroyer Lodestone");
         super.materials.add(new Pair(new BottleOfElonianWine(), 1));
-        super.materials.add(new Pair(new PileOfCrystallineDust(), 1));
+        super.materials.add(new Pair(new PileofCrystallineDust(), 1));
         super.materials.add(new Pair(new MysticCrystal(), 1));
         super.materials.add(new Pair(new DestroyerCore(), 2));
     }

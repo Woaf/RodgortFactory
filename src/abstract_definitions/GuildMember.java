@@ -19,10 +19,13 @@ import craftcomponents.MysticClover;
 import craftcomponents.Rodgort;
 import craftcomponents.SeasonedWoodPlank;
 import craftcomponents.VialOfLiquidFlame;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.util.Pair;
@@ -40,6 +43,26 @@ public class GuildMember implements Runnable {
     private CraftPhase phase;
     public GuildBank guildBank;
     private List<CraftingItem> ownInventory;
+    
+    private final int sleepTime;
+    
+    private static int getSleepTime()
+    {
+        File config = new File("src/resources/config.txt");
+        int ret = 0;
+        try {
+            Scanner sc = new Scanner(config);
+            for(int i = 0; i < 3; i++)
+            {
+                ret = sc.nextInt();
+            }
+        } catch (FileNotFoundException ex) {
+            System.err.println("Config file cannot be found!\n[" + ex.getMessage() + ']');
+        }
+
+        System.out.format("Guild memebr sleep time: %d\n", ret);
+        return ret;
+    }
 
     public GuildMember(String name, GuildBank guildBank, CraftPhase phase) {
         this.name = name;
@@ -47,6 +70,7 @@ public class GuildMember implements Runnable {
         this.phase = phase;
         this.ownInventory = new ArrayList<>();
         this.guildBank = guildBank;
+        this.sleepTime = getSleepTime();
     }
 
     public String getName() {
@@ -60,7 +84,7 @@ public class GuildMember implements Runnable {
     public CraftPhase getPhase() {
         return phase;
     }
-    
+
     public void setPhase(CraftPhase phase) {
         this.phase = phase;
     }
@@ -122,29 +146,32 @@ public class GuildMember implements Runnable {
     }
 
     private void craft(CraftComponent itemToCraft) {
-        boolean hasAllMaterials = true;
-        for (Pair<CraftingItem, Integer> item : itemToCraft.materials) {
-            if (!hasAdequateNumberOfMaterials(item.getKey(), item.getValue())) {
-                hasAllMaterials = false;
+        synchronized (guildBank) {
+            boolean hasAllMaterials = true;
+            for (Pair<CraftingItem, Integer> item : itemToCraft.materials) {
+                if (!hasAdequateNumberOfMaterials(item.getKey(), item.getValue())) {
+                    hasAllMaterials = false;
+                }
+            }
+
+            if (hasAllMaterials) {
+                itemToCraft.materials.forEach((item) -> {
+                    for (int i = 0; i < item.getValue(); i++) {
+                        try {
+                            removeItem(item.getKey().getClass().newInstance());
+                        } catch (InstantiationException | IllegalAccessException ex) {
+                            Logger.getLogger(GuildMember.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+                addItemToBank(guildBank, itemToCraft);
+            } else {
+                itemToCraft.materials.forEach((item) -> {
+                    grabMaterials(item.getKey(), randomIntGenerator(item.getValue(), 1));
+                });
             }
         }
 
-        if (hasAllMaterials) {
-            itemToCraft.materials.forEach((item) -> {
-                for (int i = 0; i < item.getValue(); i++) {
-                    try {
-                        removeItem(item.getKey().getClass().newInstance());
-                    } catch (InstantiationException | IllegalAccessException ex) {
-                        Logger.getLogger(GuildMember.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-            addItemToBank(guildBank, itemToCraft);
-        } else {
-            itemToCraft.materials.forEach((item) -> {
-                grabMaterials(item.getKey(), randomIntGenerator(item.getValue(), 1));
-            });
-        }
     }
 
     private boolean hasAdequateNumberOfMaterials(CraftingItem item, int amount) {
@@ -171,11 +198,11 @@ public class GuildMember implements Runnable {
 
     @Override
     public void run() {
-        synchronized (this) {
-            System.out.println(getPlayerId());
-            while (this.phase.getPhaseNumber() != 7) {
-                System.out.printf("[%s] is working on %s\n", name, phase.getPhaseName());
-                try {
+        System.out.println(getPlayerId());
+        while (this.phase.getPhaseNumber() != 7) {
+            System.out.printf("[%s] is working on %s\n", name, phase.getPhaseName());
+            try {
+                synchronized (this) {
                     switch (phase.getPhaseNumber()) {
                         case 1:
                             craft(new DestroyerLodestone());
@@ -183,6 +210,7 @@ public class GuildMember implements Runnable {
                             craft(new ElderWoodPlank());
                             craft(new HardWoodPlank());
                             craft(new SeasonedWoodPlank());
+                            craft(new MysticClover());
                             break;
                         case 2:
                             craft(new GiftOfMagic());
@@ -195,12 +223,16 @@ public class GuildMember implements Runnable {
                         case 3:
                             craft(new GiftOfWood());
                             craft(new VialOfLiquidFlame());
+                            craft(new DestroyerLodestone());
+                            craft(new MoltenLodestone());
                             break;
                         case 4:
+                            craft(new DestroyerLodestone());
+                            craft(new MoltenLodestone());
                             craft(new GiftOfFortune());
                             craft(new GiftOfMastery());
                             break;
-                        case 5: 
+                        case 5:
                             craft(new GiftOfRodgort());
                             break;
                         case 6:
@@ -209,11 +241,12 @@ public class GuildMember implements Runnable {
                         default:
                             break;
                     }
-                    Thread.sleep(100);
-                } catch (InterruptedException ex) {
-                    System.err.println("Error in the [" + this.getClass().getName() + "] class Run method!");
-                    Logger.getLogger(GuildMember.class.getName()).log(Level.SEVERE, null, ex);
                 }
+
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException ex) {
+                System.err.println("Error in the [" + this.getClass().getName() + "] class Run method!");
+                Logger.getLogger(GuildMember.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
